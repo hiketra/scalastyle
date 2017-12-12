@@ -31,6 +31,21 @@
  </example-configuration>
  </check>
 
+ <check id="singleton.annotation.checker">
+  <justification>
+   Files which are too long can be hard to read and understand.
+  </justification>
+  <example-configuration>
+   <![CDATA[
+ <check level="warning" class="org.scalastyle.file.FileLengthChecker" enabled="true">
+  <parameters>
+   <parameter name="maxFileLength">800</parameter>
+  </parameters>
+ </check>
+ ]]>
+  </example-configuration>
+ </check>
+
 
  <check id="magic.number">
  <justification>

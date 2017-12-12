@@ -1,24 +1,26 @@
 package org.scalastyle.file
 
-import org.scalastyle.Lines
+import org.scalastyle.{FileChecker, LineError, Lines, ScalastyleError}
+import scala.collection.mutable.MutableList
 
-/**
-  * Created by emma on 12/12/2017.
-  */
-class SingletonAnnotationChecker {
+class SingletonAnnotationChecker extends FileChecker {
 
-  def verify(lines: Lines): Unit = {
+  val errorKey = "singleton.annotation.checker"
+
+  def verify(lines: Lines): List[ScalastyleError] = {
     val lineIndices = lines.lines.zipWithIndex
+    var errorStack = MutableList.empty[ScalastyleError]
     lineIndices.foreach {
-      case (line, lineNumber) => if (line.text.contains("class")) {
+      case (line, lineNumber) => if (line.text.contains("class") && (!line.text.contains("case"))) {
         if (!lineIndices(lineNumber - 1)._1.text.contains("@Singleton")) {
-          println(s"error at line number ${lineNumber}: ${line}")
+          errorStack += LineError(lineNumber, errorKey = Some(errorKey))
         }
         else {
           println(s"line valid at ${lineNumber}: ${line}")
         }
       }
     }
+    errorStack.toList
   }
 
 }
