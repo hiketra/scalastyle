@@ -7,6 +7,7 @@
             <parameter name="maxFileLength" type="integer" default="1500"/>
         </parameters>
     </checker>
+    <checker class="org.scalastyle.file.SingletonAnnotationChecker" id="singleton.annotation.checker" defaultLevel="warning"/>
     <checker class="org.scalastyle.file.HeaderMatchesChecker" id="header.matches" defaultLevel="warning">
         <parameters>
             <parameter name="header" type="string" multiple="true" default=""/>
